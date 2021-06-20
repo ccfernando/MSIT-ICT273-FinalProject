@@ -5,7 +5,7 @@ import random
 from website import db, app
 from .routes import blueprint
 
-api=Api(blueprint, doc='/documentation')
+api = Api(blueprint, doc='/documentation')
 app.register_blueprint(blueprint)
 
 
@@ -16,7 +16,6 @@ class PersonModel(db.Model):
     wearingMask = db.Column(db.Integer, nullable=False)
     wearingFaceShield = db.Column(db.Integer, nullable=False)
     temp = db.Column(db.Float, nullable=False)
-    answer = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
         return self.id
@@ -67,24 +66,15 @@ class Generate_Random(Resource):
                 'temp': float(random.randrange(3600, 3830)) / 100
             }
 
-            if Random_Data['temp'] > 37.2 or Random_Data['age'] < 18 or Random_Data['age'] > 65:
-                ans = "Capture"
-
-            elif Random_Data['wearingmask'] == 0 or Random_Data['wearingfaceshield'] == 0:
-                ans = "Deny"
-
-            else:
-                ans = "Allow"
-
             person = PersonModel(gender=Random_Data['gender'], age=Random_Data['age'],
                                  wearingMask=Random_Data['wearingmask'],
                                  wearingFaceShield=Random_Data['wearingfaceshield'],
-                                 temp=Random_Data['temp'], answer=ans)
+                                 temp=Random_Data['temp'])
 
             db.session.add(person)
             db.session.commit()
 
-        message = {'status': 'initialized'}
+        message = {'status': '200', 'message': 'Random Persons Successfully Generated'}
         return jsonify(message)
 
 
@@ -95,14 +85,8 @@ class User_Reg(Resource):
         db.session.add(user)
         db.session.commit()
 
-        message = {'status': 'registered'}
+        message = {'status': '200', 'message': 'User Successfully Added'}
         return jsonify(message)
-
-
-class get_person(Resource):
-    def get(self):
-        result = PersonModel.query.filter_by(id=randrange(50)).first()
-        return jsonify(result.to_json())
 
 
 class get_last_user(Resource):
@@ -113,11 +97,23 @@ class get_last_user(Resource):
 
 class check_ans(Resource):
     def get(self, person_id, answer):
-        result = PersonModel.query.filter_by(id=person_id).first()
-        if result.answer == answer:
-            message = {'result': 'correct'}
+        Random_Data = PersonModel.query.filter_by(id=person_id).first()
+
+        if Random_Data.temp > 37.2:
+            ans = "Capture"
+
+        elif Random_Data.wearingMask == 0 or Random_Data.wearingFaceShield == 0 or Random_Data.age < 18 or Random_Data.age > 65:
+            ans = "Deny"
+
         else:
-            message = {'result': 'wrong'}
+            ans = "Allow"
+
+        if ans == answer:
+            message = {'status': '200', 'result': 'correct'}
+
+        else:
+            message = {'status': '200', 'result': 'wrong'}
+
         return jsonify(message)
 
 
@@ -127,7 +123,7 @@ class get_all_person(Resource):
         if result:
             return jsonify([e.to_json() for e in result])
         else:
-            message = {'error': 'Bad Request', 'message': 'No scores found'}
+            message = {'Error': 'Bad Request', 'message': 'No scores found'}
             return jsonify(message)
 
 
