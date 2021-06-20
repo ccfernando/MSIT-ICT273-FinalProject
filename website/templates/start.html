@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+
+
+<!-- Shall I Pass-->
+<section class="content-section bg-primary text-white text-center" id="services">
+	<div class="container px-4 px-lg-5">
+		<div class="content-section-heading">
+			<h3 class="text-secondary mb-0">Random Person</h3>
+			<h2 class="mb-5">Shall I Pass?</h2>
+		</div>
+		<div class="container">
+			<div class="row justify-content-md-center">
+				<div class="col-md-auto">
+					<img src="static/assets/img/person.png">
+					</div>
+					<div class="col-md-auto">
+						<button type="button" id="startgame" class="btn btn start-btn btn-lg btn-lg">START</button>
+						<div id="person-info"></div>
+					</div>
+					<!--<div class="col-md-auto text-center">-->
+					<!--				{{table|safe}}-->
+					<!--</div>-->
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div id="btnsdiv" class="row justify-content-md-center top-buffer" style="display:none">
+				<div class="col col-lg-2">
+					<button id="allow" type="button" class="btn btn-success btn-lg">Allow</button>
+				</div>
+				<div class="col-md-auto">
+					<button id="deny" type="button" class="btn btn-secondary btn-lg">Deny</button>
+				</div>
+				<div class="col col-lg-2">
+					<button id="capture" type="button" class="btn btn-danger btn-lg">Capture</button>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="content-section bg-light" id="about">
+		<div class="container">
+			<div class="row">
+				<div class="col col text-center">
+					<h3>SCORE: </h3>
+					<h4 id="currentscore">00</h4>
+				</div>
+				<div class="col text-center">
+					<h2 class="heading">TIME:</h2>
+					<h1 class="timer" id="timer">{{ rest }}s</h1>
+					<div class="d-flex justify-content-center">
+						<progress max="{{ rest }}" value="{{ rest }}" class="progress progress--rest" id="progressBar"></progress>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+{% endblock %}

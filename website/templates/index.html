@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+
+<header class="masthead d-flex align-items-center">
+	<div class="container px-4 px-lg-5 text-center">
+		<h1 class="mb-1">
+			<div class="p-3 mb-2 bg-danger text-white">The Mall Guardians</div>
+		</h1>
+		<h3 class="mb-5">
+			<em>ICT 273 Final Project - Chardy C. Fernando</em>
+		</h3>
+		<form id="myForm" >
+			<button type="submit" class="btn start-btn btn-lg" >
+				<i class="fas fa-play" aria-hidden="true"></i> PLAY GAME!
+			</button>
+		</form>
+		<form id="myForm2" >
+			<button type="submit" class="btn start-btn btn-lg" >
+				<i class="fas fa-question" aria-hidden="true"></i> How to Play
+			</button>
+		</form>
+	</div>
+</header>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Please Enter Your Name</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="/start" method="post">
+					<div class="form-group">
+						<label for="nickname">Nickname</label>
+						<input type="text" id="nickname" name="nickname" class="form-control" required minlength="4" placeholder="What should we call you?">
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary">Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel2">How to Play</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>TOY PROBLEM: Because of the implementation of MECQ in Butuan City, several restrictions have been implemented.
+In this toy problem, your task is to guard one of the largest mall in the city. Only those who meet the requirements may enter and violators will be captured.  You have three options for each person: </p>
+					<p>Allow - If a person is wearing face mask AND face shield, no fever ( temp is below 37.2), and aged between 18-65</p>
+					<p>Deny - If person is not wearing face mask OR face shield, but no fever, and is aged between 18-65 </p>
+					<p>Capture - Has fever (37.2 degree C and above), OR aged below 18, OR above 65 years old</p>
+					<p>Your objective is to correctly identify the if a person should be allowed entry, denied entry, or be captured. You have 60 seconds to determined as many person as you can. </p>
+					<div class="modal-footer">
+						<form id="modal2ok">
+							<button type="submit"  class="btn btn-primary">Ok</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

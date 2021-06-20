@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+
+
+<!-- Portfolio-->
+<section class="content-section" id="portfolio">
+	<div class="container px-4 px-lg-5">
+		<div class="content-section-heading text-center">
+			<h3 class="text-secondary mb-0">Leaderboards</h3>
+			<h2 class="mb-5">Top 5 Scorers</h2>
+		</div>
+		<div class="col-md-auto text-center">
+				{{table|safe}}
+</div>
+	</div>
+</section>
+<footer class="footer text-center">
+	<div class="container px-4 px-lg-5">
+		<ul class="list-inline mb-5">
+			<li class="list-inline-item">
+				<a class="social-link rounded-circle text-white mr-3" href="#!">
+					<i class="icon-social-facebook"></i>
+				</a>
+			</li>
+			<li class="list-inline-item">
+				<a class="social-link rounded-circle text-white mr-3" href="#!">
+					<i class="far fa-file-pdf"></i>
+				</a>
+			</li>
+			<li class="list-inline-item">
+				<a class="social-link rounded-circle text-white" href="#!">
+					<i class="icon-social-github"></i>
+				</a>
+			</li>
+		</ul>
+		<p class="text-muted small mb-0">Chardy C. Fernando | chardy.fernando@g.msuiit.edu.ph</p>
+	</div>
+</footer>
+
+
+{% endblock %}
