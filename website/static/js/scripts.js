@@ -106,13 +106,13 @@ startbtn.addEventListener("click", function() {
 	const interval = setInterval(() => {
 		if (timerCounter <= 1) {
 			var last_user_Request = new XMLHttpRequest();
-			last_user_Request.open('GET', 'http://127.0.0.1:5000/api/getlastuser/');
+			last_user_Request.open('GET', 'http://127.0.0.1:5000/api/Player/getlastuser/');
 			last_user_Request.send();
 			last_user_Request.onload = function() {
 				last_user = JSON.parse(last_user_Request.responseText);
 			};
 			var scoreRequest = new XMLHttpRequest();
-			scoreRequest.open('PUT', 'http://127.0.0.1:5000/api/updatescore/' + last_user.id + '/' + score);
+			scoreRequest.open('PUT', 'http://127.0.0.1:5000/api/Player/updatescore/' + last_user.id + '/' + score);
 			scoreRequest.send();
 			window.location.href = '/leaderboard';
 			timerElement.innerText = "Time is up!";
@@ -137,7 +137,7 @@ var idcount = 0;
 function AJAXload() {
 
 	var ourRequest = new XMLHttpRequest();
-	ourRequest.open('GET', 'http://127.0.0.1:5000/api/getallperson/');
+	ourRequest.open('GET', 'http://127.0.0.1:5000/api/RandomPerson/getallperson/');
 	ourRequest.onload = function() {
 		if (ourRequest.status >= 200 && ourRequest.status < 400) {
 			ourData = JSON.parse(ourRequest.responseText);
@@ -176,7 +176,7 @@ var ansRequest = new XMLHttpRequest();
 var allowbtn = document.getElementById("allow");
 allowbtn.addEventListener("click", function() {
 
-	ansRequest.open('GET', 'http://127.0.0.1:5000/api/check/person/' + (idcount + 1) + '/Allow');
+	ansRequest.open('GET', 'http://127.0.0.1:5000/api/RandomPerson/check/person/' + (idcount + 1) + '/Allow');
 	ansRequest.onload = function() {
 		if (ansRequest.status >= 200 && ansRequest.status < 400) {
 			ansRes = JSON.parse(ansRequest.responseText);
@@ -197,7 +197,7 @@ allowbtn.addEventListener("click", function() {
 var denybtn = document.getElementById("deny");
 denybtn.addEventListener("click", function() {
 
-	ansRequest.open('GET', 'http://127.0.0.1:5000/api/check/person/' + (idcount + 1) + '/Deny');
+	ansRequest.open('GET', 'http://127.0.0.1:5000/api/RandomPerson/check/person/' + (idcount + 1) + '/Deny');
 	ansRequest.onload = function() {
 		if (ansRequest.status >= 200 && ansRequest.status < 400) {
 			ansRes = JSON.parse(ansRequest.responseText);
@@ -219,7 +219,7 @@ denybtn.addEventListener("click", function() {
 
 var capturebtn = document.getElementById("capture");
 capturebtn.addEventListener("click", function() {
-	ansRequest.open('GET', 'http://127.0.0.1:5000/api/check/person/' + (idcount + 1) + '/Capture');
+	ansRequest.open('GET', 'http://127.0.0.1:5000/api/RandomPerson/check/person/' + (idcount + 1) + '/Capture');
 	ansRequest.onload = function() {
 		if (ansRequest.status >= 200 && ansRequest.status < 400) {
 			ansRes = JSON.parse(ansRequest.responseText);

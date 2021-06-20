@@ -16,13 +16,13 @@ def index():
 @app.route("/start", methods=['POST'])
 def start():
     # by default, I set the number of random number of persons to be generated to 50
-    requests.post(BASE + "initialize/50")
-    requests.post(BASE + "register/" + request.form.get('nickname'))
+    requests.post(BASE + "RandomPerson/initialize/50")
+    requests.post(BASE + "Player/register/" + request.form.get('nickname'))
     return render_template('start.html', rest=60, imetype='text/html')
 
 
 @app.route("/leaderboard", methods=['GET'])
 def leaderboard():
-    response = requests.get(BASE + "leaderboard/")
+    response = requests.get(BASE + "Player/leaderboard/")
     val = json2html.convert(json=response.text, table_attributes="id=\"info-table\" class=\"table table table-responsive table-hover\"")
     return render_template('leaderboard.html', table=val, mimetype='text/html')

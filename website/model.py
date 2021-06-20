@@ -1,12 +1,19 @@
 from flask import jsonify
-from flask_restplus import Resource, Api
+from flask_restplus import Resource, Api, Namespace
 from random import randrange
 import random
 from website import db, app
 from .routes import blueprint
 
-api = Api(blueprint, doc='/documentation')
+api = Api(blueprint, doc='/documentation', version='1.0',
+          title='The Mall Guardians API',
+          description='this API is created by ccfernando for ICT 273 final project')
 app.register_blueprint(blueprint)
+
+ns_p = Namespace("RandomPerson")
+ns_u = Namespace("Player")
+api.add_namespace(ns_p)
+api.add_namespace(ns_u)
 
 
 class PersonModel(db.Model):
@@ -173,12 +180,12 @@ class leaderboard(Resource):
             return jsonify(message)
 
 
-api.add_resource(Generate_Random, "/initialize/<int:ranNum>")
-api.add_resource(User_Reg, "/register/<string:nickname>")
-api.add_resource(get_all_person, "/getallperson/")
-api.add_resource(del_person, "/delete/person/<int:person_id>")
-api.add_resource(check_ans, "/check/person/<int:person_id>/<string:answer>")
-api.add_resource(del_user, "/delete/user/<int:user_id>")
-api.add_resource(update_score, "/updatescore/<int:user_id>/<int:user_score>")
-api.add_resource(leaderboard, "/leaderboard/")
-api.add_resource(get_last_user, "/getlastuser/")
+ns_p.add_resource(Generate_Random, "/initialize/<int:ranNum>")
+ns_p.add_resource(get_all_person, "/getallperson/")
+ns_p.add_resource(del_person, "/delete/person/<int:person_id>")
+ns_p.add_resource(check_ans, "/check/person/<int:person_id>/<string:answer>")
+ns_u.add_resource(User_Reg, "/register/<string:nickname>")
+ns_u.add_resource(del_user, "/delete/user/<int:user_id>")
+ns_u.add_resource(update_score, "/updatescore/<int:user_id>/<int:user_score>")
+ns_u.add_resource(leaderboard, "/leaderboard/")
+ns_u.add_resource(get_last_user, "/getlastuser/")
